@@ -103,6 +103,6 @@ awk -F'\t' 'NR == 1 || $2 != ""' results/multiqc/multiqc_data/multiqc_general_st
 
 #Git commit
 git add scripts/
-git commit -m "Day 1: reads to counts"
+git commit -m "BulkRNA: reads to counts"
 git push
 
