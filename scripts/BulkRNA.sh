@@ -101,4 +101,8 @@ done
 multiqc -q -o results/multiqc results/fastqc results/fastqc_trimmed results/fastp results/salmon
 awk -F'\t' 'NR == 1 || $2 != ""' results/multiqc/multiqc_data/multiqc_general_stats.txt | cut -f1-4
 
+#Git commit
+git add scripts/
+git commit -m "Day 1: reads to counts"
+git push
 
