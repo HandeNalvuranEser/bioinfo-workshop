@@ -106,3 +106,9 @@ git add scripts/
 git commit -m "BulkRNA: reads to counts"
 git push
 
+git add scripts/
+git commit -m "BulkRNA: differential expression"
+git push
+git log --oneline
+git status
+
