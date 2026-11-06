@@ -185,11 +185,29 @@ norm_long <- counts(dds, normalized = TRUE)[top6$gene_id, ] |>
   left_join(genes |> select(gene_id, gene_name), by = "gene_id")
 norm_long
 
+ggplot(norm_long, aes(x = dex, y = normalized_count, colour = cell, group = cell)) +
+  geom_point(size = 2) +
+  geom_line() +
+  scale_y_log10() +
+  facet_wrap(~ gene_name, scales = "free_y") +
+  labs(x = NULL, y = "Normalized count (log scale)", title = "The six most significant
+genes") +
+  theme_bw()
+
 #Sample heatmap for top 30 gene
 top30 <- res_tbl |> filter(padj < 0.05) |> slice_min(padj, n = 30, with_ties = FALSE)
 m <- assay(vsd)[top30$gene_id, ]
 m <- m - rowMeans(m)
 rownames(m) <- make.unique(top30$gene_name)
 pheatmap(m, annotation_col = ann, main = "Top 30 genes, VST, centred per gene")
+
+#Sonuçların kaydedilmesi ve fonksiyonel zenginleştirme
+write_tsv(res_tbl, "results/de_results_dex.tsv")
+sig |> filter(log2FoldChange > 0) |> pull(gene_name) |> unique() |>
+  writeLines("results/genes_up.txt")
+sig |> filter(log2FoldChange < 0) |> pull(gene_name) |> unique() |>
+  writeLines("results/genes_down.txt")
+saveRDS(dds, "results/dds_day1.rds")
+list.files("results", pattern = "tsv|txt|rds")
 
 
