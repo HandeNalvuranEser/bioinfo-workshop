@@ -41,7 +41,7 @@ bash check/BulkRNA-envs.sh
 
 #Git push
 git add envs/ scripts/
-git commit -m "Day 1: environment files"
+git commit -m " BulkRNAseq: environment files"
 git push
 
 #Retrieve Data/Download
