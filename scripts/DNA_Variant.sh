@@ -176,8 +176,13 @@ bcftools query -H -f '%POS\t%ID\t%REF\t%ALT[\t%GT]\t%INFO/BCSQ\t%INFO/gnomAD_AF\
   results/annot/NA12878.annotated.vcf.gz > results/annot/annotated.tsv
 head -3 results/annot/annotated.tsv
 
+#False positive ornek
 fp=$(head -1 results/isec/false_positives.tsv | cut -f1)
 echo "first false positive: chr20:$fp"
 bcftools view -H -r chr20:$fp results/variants/NA12878.pass.vcf.gz | cut -f1-6,10
 samtools tview -d T -w 100 -p chr20:$((fp - 40)) results/align/NA12878.bam results/ref/chr20.fa | head -25
+
+git add README.md data/README.md scripts/ envs/
+git commit -m "Day 3: annotation; README for the certificate"
+git push
 
